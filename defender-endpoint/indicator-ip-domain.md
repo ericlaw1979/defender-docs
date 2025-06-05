@@ -99,6 +99,10 @@ For processes other than Microsoft Edge and Internet Explorer, web protection sc
 - FQDNs loaded via HTTP2 connection coalescing can only be blocked in Microsoft Edge
 - If there are conflicting URL indicator policies, the longer path is applied. For example, the URL indicator policy `https://support.microsoft.com/office` takes precedence over the URL indicator policy `https://support.microsoft.com`.
 
+### Microsoft Edge and Internet Explorer processes
+
+Microsoft Edge and Internet Explorer use the Microsoft SmartScreen feature for inspection and enforcement. SmartScreen evaluates the full URL (including path) for each top-level navigation, loaded subframe, and file download. Subresource request URLs (e.g. images, videos, scripts) are not evaluated or blocked.
+
 ## Network protection implementation
 
 In non-Microsoft Edge processes, Network Protection determines the fully qualified domain name for each HTTPS connection by examining the content of the TLS handshake that occurs after a TCP/IP handshake. This requires that the HTTPS connection use TCP/IP (not UDP/QUIC) and that the ClientHello message not be encrypted. To disable QUIC and Encrypted Client Hello in Google Chrome, see [QuicAllowed](https://chromeenterprise.google/policies/#QuicAllowed) and [EncryptedClientHelloEnabled](https://chromeenterprise.google/policies/#EncryptedClientHelloEnabled). For Mozilla Firefox, see [Disable EncryptedClientHello](https://mozilla.github.io/policy-templates/#disableencryptedclienthello) and [network.http.http3.enable](https://support.mozilla.org/ml/questions/1408003#answer-1571474).
